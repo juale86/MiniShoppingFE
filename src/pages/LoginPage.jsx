@@ -36,7 +36,6 @@ export function LoginPage() {
         <p className="mt-1 text-center text-sm text-slate-500">
           Ingresa a tu cuenta de TesloShop
         </p>
-
         <form onSubmit={onSubmit} className="mt-6 space-y-4">
           <div>
             <label className="mb-1 block text-sm font-medium text-slate-700">Correo</label>
