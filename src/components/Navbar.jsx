@@ -1,5 +1,6 @@
 import { NavLink, useNavigate } from 'react-router-dom'
 import { useAuthStore, STATUS } from '../store/authStore'
+import { useCartStore } from '../store/cartStore'
 
 const linkClass = ({ isActive }) =>
   `rounded-md px-3 py-2 text-sm font-medium transition-colors ${
@@ -11,6 +12,7 @@ export function Navbar() {
   const user = useAuthStore((state) => state.user)
   const logout = useAuthStore((state) => state.logout)
   const navigate = useNavigate()
+  const cartTotal = useCartStore((state) => state.getTotalItems())
   const isAdmin = user?.roles?.includes('admin')
 
   const handleLogout = () => {
@@ -35,6 +37,17 @@ export function Navbar() {
               Nuevo producto
             </NavLink>
           )}
+
+          <NavLink to="/cart" className={linkClass} end>
+            <span className="relative">
+              🛒 Carrito
+              {cartTotal > 0 && (
+                <span className="absolute -right-2 -top-2 flex h-5 w-5 items-center justify-center rounded-full bg-indigo-600 text-xs font-bold text-white">
+                  {cartTotal}
+                </span>
+              )}
+            </span>
+          </NavLink>
 
           {status === STATUS.AUTHENTICATED ? (
             <>

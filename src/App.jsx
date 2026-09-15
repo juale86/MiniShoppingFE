@@ -7,6 +7,7 @@ import { ProtectedRoute } from './components/ProtectedRoute'
 import { LoginPage } from './pages/LoginPage'
 import { RegisterPage } from './pages/RegisterPage'
 import { ProductsPage } from './pages/ProductsPage'
+import { CartPage } from './pages/CartPage'
 import { ProductFormPage } from './pages/ProductFormPage'
 import { NotFoundPage } from './pages/NotFoundPage'
 
@@ -25,6 +26,7 @@ function App() {
       <main className="flex flex-1 flex-col">
         <Routes>
           <Route path="/" element={<ProductsPage />} />
+          <Route path="/cart" element={<CartPage />} />
           <Route path="/login" element={<LoginPage />} />
           <Route path="/register" element={<RegisterPage />} />
 

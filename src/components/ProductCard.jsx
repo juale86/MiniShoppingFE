@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom'
+import { useCartStore } from '../store/cartStore'
 
 const currencyFormatter = new Intl.NumberFormat('es-CO', {
   style: 'currency',
@@ -7,6 +8,7 @@ const currencyFormatter = new Intl.NumberFormat('es-CO', {
 
 export function ProductCard({ product, isAdmin, onDelete }) {
   const image = product.images?.[0]
+  const addItem = useCartStore((state) => state.addItem)
 
   return (
     <div className="group overflow-hidden rounded-xl bg-white shadow-sm ring-1 ring-slate-200 transition-shadow hover:shadow-md">
@@ -31,7 +33,7 @@ export function ProductCard({ product, isAdmin, onDelete }) {
         </p>
         <p className="mt-1 text-xs text-slate-400">Stock: {product.stock ?? 0}</p>
 
-        {isAdmin && (
+        {isAdmin ? (
           <div className="mt-3 flex gap-2">
             <Link
               to={`/products/${product.id}/edit`}
@@ -46,6 +48,13 @@ export function ProductCard({ product, isAdmin, onDelete }) {
               Eliminar
             </button>
           </div>
+        ) : (
+          <button
+            onClick={() => addItem(product, 1)}
+            className="mt-3 w-full rounded-md bg-indigo-600 px-3 py-1.5 text-xs font-medium text-white hover:bg-indigo-500"
+          >
+            Agregar al carrito
+          </button>
         )}
       </div>
     </div>
