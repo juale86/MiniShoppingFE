@@ -39,19 +39,21 @@ export const useCartStore = create((set, get) => ({
       return { items: newItems }
     }),
 
-  updateQuantity: (productId, quantity) =>
-    set((state) => {
-      if (quantity <= 0) {
-        return get().removeItem(productId)
-      }
+  updateQuantity: (productId, quantity) => {
+    if (quantity <= 0) {
+      get().removeItem(productId)
+      return
+    }
 
+    set((state) => {
       const newItems = state.items.map((item) =>
         item.id === productId ? { ...item, quantity } : item
       )
 
       localStorage.setItem('cart', JSON.stringify(newItems))
       return { items: newItems }
-    }),
+    })
+  },
 
   clearCart: () => {
     localStorage.removeItem('cart')

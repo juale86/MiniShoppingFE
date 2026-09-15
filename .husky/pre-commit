@@ -1,4 +1,11 @@
 #!/bin/sh
 . "$(dirname "$0")/_/husky.sh"
 
+echo "🔍 Running linter..."
 npx lint-staged
+
+echo "✅ Linter passed!"
+echo "🧪 Running tests..."
+npm run test -- --run --reporter=verbose
+
+echo "✅ All checks passed! Committing..."
